@@ -48,12 +48,10 @@ def query(question: str) -> Dict:
     retriever = get_retriever()
     llm = ChatOpenAI(model=MODEL_NAME, temperature=TEMPERATURE)
 
-    # Retrieve relevant chunks
     retrieved_docs = retriever.invoke(question)
     context = _format_docs(retrieved_docs)
     sources = _extract_sources(retrieved_docs)
 
-    # Build the prompt with retrieved context injected into the system message
     prompt = ChatPromptTemplate.from_messages([
         ("system", SYSTEM_PROMPT),
         ("human", "{question}"),

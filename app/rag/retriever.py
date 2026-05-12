@@ -4,7 +4,6 @@ Returns the top-k most relevant regulatory chunks for a given query.
 """
 
 import os
-from typing import Optional
 
 import chromadb
 from langchain_chroma import Chroma
@@ -19,10 +18,7 @@ DEFAULT_TOP_K = 25
 
 
 def get_retriever(top_k: int = DEFAULT_TOP_K) -> VectorStoreRetriever:
-    """
-    Load the persisted ChromaDB collection and return a LangChain retriever.
-    Call run_ingestion() first if the collection does not yet exist.
-    """
+    """Load the persisted ChromaDB collection and return a LangChain retriever."""
     embeddings = get_embeddings()
 
     client = chromadb.PersistentClient(path=CHROMA_DB_DIR)
